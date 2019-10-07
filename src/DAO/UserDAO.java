@@ -7,7 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
+    private static UserDAO userDAO;
     private Connection connection;
+
+    public static UserDAO getUserDAODataBase() {
+        if (userDAO == null) {
+            userDAO = new UserDAO();
+        }
+        return userDAO;
+    }
 
     public UserDAO() {
         connection = SetConnection.createConnection();
