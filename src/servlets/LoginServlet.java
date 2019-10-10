@@ -5,10 +5,7 @@ import services.LoginService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -22,11 +19,16 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         PrintWriter pw = response.getWriter();
 
+
         if (service.validateLogin(email, password)) {
             User user = service.userSession(email);
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(true);
             session.setAttribute("username", user.getUsername());
             session.setAttribute("email", email);
+            Cookie nameCookie = new Cookie("email", email);
+            Cookie passwordCookie = new Cookie("password", password);
+            response.addCookie(nameCookie);
+            response.addCookie(passwordCookie);
             //переходим в страницу с темами/тестами;
         }
         else {

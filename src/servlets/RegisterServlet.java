@@ -23,7 +23,7 @@ public class RegisterServlet extends HttpServlet {
         String fullname = request.getParameter("fullname");
         Integer classNumber = Integer.parseInt(request.getParameter("classNumber"));
         String email = request.getParameter("email");
-        Integer id = Integer.parseInt(request.getParameter("id"));
+        String id = request.getParameter("id");
 
         user.setUsername(username);
         user.setPassword(password);
@@ -32,19 +32,15 @@ public class RegisterServlet extends HttpServlet {
         user.setEmail(email);
         user.setClassNumber(classNumber);
 
-        if (id == 0) {
+        if (id == null || id.isEmpty()) {
             service.createUser(user);
             /* Переходим на страницу с темами*/
         } else {
-            user.setId(id);
+            user.setId(Integer.parseInt(id));
             service.editAccount(user);
             request.setAttribute("users", service.listUsers());
             //обновляем профиль
         }
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 }
