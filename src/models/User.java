@@ -12,9 +12,18 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String login, String password, String name, String fullname, Integer classNumber, String email) {
+    public User(String username, String password, String name, String fullname, Integer classNumber, String email) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.fullname = fullname;
+        this.classNumber = classNumber;
+        this.email = email;
+    }
+
+    public User(Integer id, String username, String password, String name, String fullname, Integer classNumber, String email) {
         this.id = id;
-        this.username = login;
+        this.username = username;
         this.password = password;
         this.name = name;
         this.fullname = fullname;

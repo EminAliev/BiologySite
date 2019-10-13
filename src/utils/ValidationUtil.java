@@ -5,14 +5,14 @@ import java.util.regex.Pattern;
 
 public class ValidationUtil {
     public static boolean validateEmail(String email) {
-        String emailPattern = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-        Pattern p = Pattern.compile(emailPattern);
+        String emailp = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        Pattern p = Pattern.compile(emailp);
         Matcher m = p.matcher(email);
         return m.matches();
     }
 
-    public static boolean validateString(String str) {
-        return str.matches("[a-zA-Z]");
+    public static boolean validateString(String string) {
+        return string.matches("[a-zA-Z]");
     }
 
     public static boolean validatePassword(String password) {

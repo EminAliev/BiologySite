@@ -22,12 +22,24 @@ public class UserDAO {
     }
 
 
+    private RowMapper<User> userRowMapper = row -> {
+        Integer id = row.getObject("id", Integer.class);
+        String username = row.getString("username");
+        String password = row.getString("password");
+        Integer classnumber = row.getObject("classnumber", Integer.class);
+        String name = row.getString("name");
+        String fullname = row.getString("fullname");
+        String email = row.getString("email");
+        return new User(id, username, password, name, fullname, classnumber, email);
+    };
+
+
     public boolean validateLogin(String email, String password) {
         boolean login = false;
 
         try {
             PreparedStatement statement = connection
-                    .prepareStatement("select * from DatabaseProject where email=? and password=?");
+                    .prepareStatement("select * from users where email=? and password=?");
             statement.setString(1, email);
             statement.setString(2, password);
 
@@ -45,19 +57,13 @@ public class UserDAO {
         User user = new User();
         try {
             PreparedStatement statement = connection
-                    .prepareStatement("select * from DatabaseProject where email=?");
+                    .prepareStatement("select * from users where email=?");
             statement.setString(1, email);
 
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                user.setId(resultSet.getInt("id"));
-                user.setUsername(resultSet.getString("username"));
-                user.setPassword(resultSet.getString("password"));
-                user.setEmail(resultSet.getString("email"));
-                user.setName(resultSet.getString("name"));
-                user.setFullname(resultSet.getString("fullname"));
-                user.setClassNumber(resultSet.getInt("classNumber"));
+                user = userRowMapper.mapRow(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,7 +75,7 @@ public class UserDAO {
     public void createUser(User user) {
         try {
             PreparedStatement statement = connection
-                    .prepareStatement("insert into DatabaseProject(username,password,email,name,fullname,classNumber) values (?,?,?,?,?,?)");
+                    .prepareStatement("insert into users(username,password,email,name,fullname,classNumber) values (?,?,?,?,?,?)");
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
@@ -87,7 +93,7 @@ public class UserDAO {
     public void editAccount(User user) {
         try {
             PreparedStatement statement = connection
-                    .prepareStatement("update DatabaseProject set username=?, password=?" + " where id=?");
+                    .prepareStatement("update users set username=?, password=?" + " where id=?");
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
             statement.setInt(3, user.getId());
@@ -114,16 +120,9 @@ public class UserDAO {
         List<User> userList = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from DatabaseProject");
+            ResultSet resultSet = statement.executeQuery("select * from users");
             while (resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setUsername(resultSet.getString("username"));
-                user.setPassword(resultSet.getString("password"));
-                user.setEmail(resultSet.getString("email"));
-                user.setName(resultSet.getString("name"));
-                user.setFullname(resultSet.getString("fullname"));
-                user.setClassNumber(resultSet.getInt("classNumber"));
+                User user = userRowMapper.mapRow(resultSet);
                 userList.add(user);
             }
 
@@ -139,23 +138,52 @@ public class UserDAO {
         User user = new User();
         try {
             PreparedStatement statement = connection
-                    .prepareStatement("select * from DatabaseProject where id= ?");
+                    .prepareStatement("select * from users where id= ?");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                user.setId(resultSet.getInt("id"));
-                user.setUsername(resultSet.getString("username"));
-                user.setPassword(resultSet.getString("password"));
-                user.setEmail(resultSet.getString("email"));
-                user.setName(resultSet.getString("name"));
-                user.setFullname(resultSet.getString("fullname"));
-                user.setClassNumber(resultSet.getInt("classNumber"));
+                user = userRowMapper.mapRow(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        return user;
+    }
+
+    public User findByUsername(String username) {
+        User user = null;
+        try {
+            PreparedStatement statement = connection
+                    .prepareStatement("select * from users where username = " + username + ";");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = userRowMapper.mapRow(resultSet);
+            }
+            statement.close();
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+        return user;
+    }
+
+    public User findbyID(int id) {
+        User user = null;
+        try {
+            PreparedStatement statement = connection
+                    .prepareStatement("select * from users where id = " + id + ";");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                user = userRowMapper.mapRow(resultSet);
+            }
+            statement.close();
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
         return user;
     }
 }

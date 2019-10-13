@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebFilter(filterName = "ProfileFilter")
 public class ProfileFilter implements Filter {
@@ -15,10 +14,8 @@ public class ProfileFilter implements Filter {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        res.setContentType("text/html");
-        PrintWriter pw = res.getWriter();
+        HttpServletRequest httpReq = (HttpServletRequest) request;
+        HttpServletResponse httpRes = (HttpServletResponse) response;
 
         String name = request.getParameter("name");
         String username = request.getParameter("username");
@@ -28,23 +25,23 @@ public class ProfileFilter implements Filter {
 
 
         if (name == null || !ValidationUtil.validateString(name)) {
-            pw.print("<font size='3' color='red'>Invalid first name input </font>");
-            req.getRequestDispatcher("personalDetail.html").include(request, response);
+            //httpReq.getRequestDispatcher("").include(request, response);
+            //снова на форму
 
         } else if (fullname == null && !ValidationUtil.validateString(fullname)) {
-            pw.print("<font size='3' color='red'>Invalid father name input </font>");
-            req.getRequestDispatcher("personalDetail.html").include(request, response);
+            //httpReq.getRequestDispatcher("").include(request, response);
+            //снова на форму
 
         } else if (email == null || !ValidationUtil.validateEmail(email)) {
-            pw.print("<font size='3' color='red'>Invalid email input </font>");
-            req.getRequestDispatcher("personalDetail.html").include(request, response);
+            //httpReq.getRequestDispatcher("").include(request, response);
+            //снова на форму
 
         } else if (username == null && !ValidationUtil.validateString(username)) {
-            pw.print("<font size='3' color='red'>Invalid father name input </font>");
-            req.getRequestDispatcher("personalDetail.html").include(request, response);
+            //httpReq.getRequestDispatcher("").include(request, response);
+            //снова на форму
         } else if (password == null && !ValidationUtil.validatePassword(password)) {
-            pw.print("<font size='3' color='red'>Invalid father name input </font>");
-            req.getRequestDispatcher("personalDetail.html").include(request, response);
+            //httpReq.getRequestDispatcher("").include(request, response);
+            //снова на форму
         } else {
             chain.doFilter(request, response);
         }

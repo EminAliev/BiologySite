@@ -5,6 +5,7 @@ import services.LoginService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,13 +18,12 @@ public class RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = new User();
-        String username = request.getParameter("username");
+        String username = request.getParameter("username").toLowerCase();
         String password = request.getParameter("password");
         String name = request.getParameter("name");
         String fullname = request.getParameter("fullname");
         Integer classNumber = Integer.parseInt(request.getParameter("classNumber"));
         String email = request.getParameter("email");
-        String id = request.getParameter("id");
 
         user.setUsername(username);
         user.setPassword(password);
@@ -32,15 +32,21 @@ public class RegisterServlet extends HttpServlet {
         user.setEmail(email);
         user.setClassNumber(classNumber);
 
-        if (id == null || id.isEmpty()) {
-            service.createUser(user);
-            /* Переходим на страницу с темами*/
+
+        service.createUserValidate(username, password, name, fullname, email, classNumber);
+        if (service.getErrorMessage() == null) {
+            Cookie cookie = new Cookie("language", "russian");
+            cookie.setMaxAge(30 * 24 * 60 * 60 * 364);
+            response.addCookie(cookie);
+            response.sendRedirect("/login");
         } else {
-            user.setId(Integer.parseInt(id));
-            service.editAccount(user);
-            request.setAttribute("users", service.listUsers());
-            //обновляем профиль
+            response.sendRedirect("/registration?error=" + service.getErrorMessage().getError_message());
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // обработка (шаблон)
 
     }
 }
