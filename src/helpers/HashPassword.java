@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 public class HashPassword {
     public static String md5(String password) {
 
-        MessageDigest messageDigest = null;
+        MessageDigest messageDigest;
         byte[] digests = new byte[0];
 
         try {

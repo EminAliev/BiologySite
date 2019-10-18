@@ -3,6 +3,7 @@ package servlets;
 import helpers.HashPassword;
 import models.User;
 import services.LoginService;
+import services.TokenService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,19 +14,27 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
 
     private LoginService service = new LoginService();
+    private TokenService tokenService = new TokenService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username").toLowerCase();
         String password = request.getParameter("password");
+        String r = "";
+        if (request.getParameter("switch") != null)
+            r = "on";
 
-
-        //обраотка нажатия кнопки "запомнить меня"
         User user = service.findbyUsername(username);
 
         if (user != null) {
             if (HashPassword.md5(password).equals(user.getPassword())) {
-                request.getSession().setAttribute("user", user);
-                //нужна обраотка "запомнить меня"
+                request.getSession().setAttribute("curr_user", user);
+                if (r.equals("on")) {
+                    String token = TokenService.getToken();
+                    Cookie cookie = new Cookie("curr_user", token);
+                    cookie.setMaxAge(30 * 24 * 60 * 60);
+                    response.addCookie(cookie);
+                    tokenService.add(user.getId(), token);
+                }
 
                 response.sendRedirect("/home");
 
