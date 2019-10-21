@@ -62,7 +62,6 @@ public class QuestionDAO {
                     .prepareStatement("select * from questions where id= ?");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-
             if (resultSet.next()) {
                 question = questionRowMapper.mapRow(resultSet);
             }
@@ -72,5 +71,6 @@ public class QuestionDAO {
 
         return question;
     }
+
 
 }

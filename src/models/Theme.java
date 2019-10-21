@@ -1,22 +1,22 @@
 package models;
 
 public class Theme {
-    private String id;
+    private Integer id;
     private String nameTheme;
     private String textTheme;
 
-    public Theme(String id, String nameTheme, String textTheme) {
+    public Theme(Integer id, String nameTheme, String textTheme) {
         this.id = id;
         this.nameTheme = nameTheme;
         this.textTheme = textTheme;
     }
 
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
