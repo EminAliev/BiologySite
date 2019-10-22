@@ -4,6 +4,7 @@ import DAO.CommentDAO;
 import helpers.Errors;
 import models.Comment;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class CommentService {
@@ -28,6 +29,10 @@ public class CommentService {
     public void addComment(int idUser, int idComment, String text) {
         Comment comment = new Comment(idUser, idComment, text, "DATE");
         commentDAO.addComment(comment);
+    }
+
+    public boolean deleteComment(int id) throws SQLException {
+        return commentDAO.deleteComment(id);
     }
 
 }

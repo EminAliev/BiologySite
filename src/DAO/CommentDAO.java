@@ -1,6 +1,8 @@
 package DAO;
 
 import models.Comment;
+import models.Question;
+import models.Theme;
 import models.User;
 import services.LoginService;
 
@@ -64,6 +66,27 @@ public class CommentDAO {
                 e.printStackTrace();
             }
         }
+    }
+
+    /*public Comment newComment(User username, Theme theme, String date, String text) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO comments (iduser, id, text, date) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+        statement.setInt(1, username.getId());
+        statement.setInt(2, theme.getId());
+        statement.setString(3, date);
+        statement.setString(4, text);
+        statement.executeUpdate();
+        ResultSet keys = statement.getGeneratedKeys();
+        if (keys.next()) {
+            Comment comment = commentRowMapper.mapRow(keys);
+            return comment;
+        }
+        return null;
+    }*/
+
+    public boolean deleteComment(int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM comments WHERE id = ?");
+        statement.setInt(1, id);
+        return statement.execute();
     }
 
 }
