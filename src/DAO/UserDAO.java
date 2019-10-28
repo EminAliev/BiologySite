@@ -109,7 +109,7 @@ public class UserDAO {
     public void deleteAccount(int id) {
         try {
             PreparedStatement statement = connection
-                    .prepareStatement("delete from DatabaseProject where id=?");
+                    .prepareStatement("delete from users where id=?");
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
