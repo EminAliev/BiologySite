@@ -1,5 +1,7 @@
 package DAO;
 
+import helpers.RowMapper;
+import helpers.SetConnection;
 import models.Theme;
 
 import java.sql.*;

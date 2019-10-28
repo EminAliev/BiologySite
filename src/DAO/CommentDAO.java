@@ -1,8 +1,8 @@
 package DAO;
 
+import helpers.RowMapper;
+import helpers.SetConnection;
 import models.Comment;
-import models.Question;
-import models.Theme;
 import models.User;
 import services.LoginService;
 

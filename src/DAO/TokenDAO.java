@@ -1,5 +1,7 @@
 package DAO;
 
+import helpers.SetConnection;
+
 import java.sql.*;
 
 public class TokenDAO {

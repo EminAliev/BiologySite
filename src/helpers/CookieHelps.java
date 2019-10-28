@@ -1,6 +1,5 @@
 package helpers;
 
-import filters.ProfileFilter;
 import models.User;
 import services.LoginService;
 import services.TokenService;
