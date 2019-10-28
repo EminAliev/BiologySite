@@ -4,18 +4,20 @@ public class Result {
     private int id;
     private int correctAnswer;
     private int wrongAnswer;
+    private int countCorrect;
     private int idQuestion;
     private int idUser;
 
     public Result() {
     }
 
-    public Result(int id, int correctAnswer, int wrongAnswer, int idQuestion, int idUser) {
+    public Result(int id, int correctAnswer, int wrongAnswer, int idQuestion, int idUser, int countCorrect) {
         this.id = id;
         this.correctAnswer = correctAnswer;
         this.wrongAnswer = wrongAnswer;
         this.idQuestion = idQuestion;
         this.idUser = idUser;
+        this.countCorrect = countCorrect;
     }
 
     public int getId() {
@@ -56,5 +58,13 @@ public class Result {
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+
+    public int getCountCorrect() {
+        return countCorrect;
+    }
+
+    public void setCountCorrect(int countCorrect) {
+        this.countCorrect = countCorrect;
     }
 }
