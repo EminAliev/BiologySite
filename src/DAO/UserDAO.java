@@ -38,6 +38,7 @@ public class UserDAO {
 
 
     public boolean validateLogin(String email, String password) {
+        connection = SetConnection.createConnection();
         boolean login = false;
 
         try {
@@ -76,6 +77,7 @@ public class UserDAO {
 
 
     public void createUser(User user) {
+        connection = SetConnection.createConnection();
         try {
             PreparedStatement statement = connection
                     .prepareStatement("insert into users(username,password,email,name,fullname,classNumber) values (?,?,?,?,?,?)");
@@ -94,6 +96,7 @@ public class UserDAO {
 
 
     public void editAccount(User user) {
+        connection = SetConnection.createConnection();
         try {
             PreparedStatement statement = connection
                     .prepareStatement("update users set username=?, password=?" + " where id=?");
@@ -108,6 +111,7 @@ public class UserDAO {
 
 
     public void deleteAccount(int id) {
+        connection = SetConnection.createConnection();
         try {
             PreparedStatement statement = connection
                     .prepareStatement("delete from users where id=?");
@@ -120,6 +124,7 @@ public class UserDAO {
 
 
     public List<User> listUsers() {
+        connection = SetConnection.createConnection();
         List<User> userList = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -138,6 +143,7 @@ public class UserDAO {
 
 
     public User getUserByID(int id) {
+        connection = SetConnection.createConnection();
         User user = new User();
         try {
             PreparedStatement statement = connection
@@ -156,6 +162,7 @@ public class UserDAO {
     }
 
     public User findByUsername(String username) {
+        connection = SetConnection.createConnection();
         User user = null;
         try {
             PreparedStatement statement = connection
@@ -173,6 +180,7 @@ public class UserDAO {
     }
 
     public User findbyID(int id) {
+        connection = SetConnection.createConnection();
         User user = null;
         try {
             PreparedStatement statement = connection

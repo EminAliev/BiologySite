@@ -35,6 +35,7 @@ public class ResultsDAO {
     };
 
     public Result getResultbyID(int id) {
+        connection = SetConnection.createConnection();
         try {
             PreparedStatement statement = connection
                     .prepareStatement("select * from resuts where id=?");
@@ -54,6 +55,7 @@ public class ResultsDAO {
     }
 
     public List<Result> getResultList() {
+        connection = SetConnection.createConnection();
         List<Result> resultList = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();

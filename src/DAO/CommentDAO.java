@@ -36,6 +36,7 @@ public class CommentDAO {
     };
 
     public List<Comment> getComments() {
+        connection = SetConnection.createConnection();
         List<Comment> comments = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -53,6 +54,7 @@ public class CommentDAO {
     }
 
     public void addComment(Comment comment) {
+        connection = SetConnection.createConnection();
         if (comment != null) {
             try {
                 PreparedStatement statement = connection
@@ -69,6 +71,7 @@ public class CommentDAO {
     }
 
     /*public Comment newComment(User username, Theme theme, String date, String text) throws SQLException {
+        connection = SetConnection.createConnection();
         PreparedStatement statement = connection.prepareStatement("INSERT INTO comments (iduser, id, text, date) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, username.getId());
         statement.setInt(2, theme.getId());
@@ -84,6 +87,7 @@ public class CommentDAO {
     }*/
 
     public boolean deleteComment(int id) throws SQLException {
+        connection = SetConnection.createConnection();
         PreparedStatement statement = connection.prepareStatement("DELETE FROM comments WHERE id = ?");
         statement.setInt(1, id);
         return statement.execute();

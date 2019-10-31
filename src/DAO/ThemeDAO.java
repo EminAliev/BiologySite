@@ -31,6 +31,7 @@ public class ThemeDAO {
     };
 
     public List<Theme> listThemes() {
+        connection = SetConnection.createConnection();
         List<Theme> themeList = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -48,6 +49,7 @@ public class ThemeDAO {
     }
 
     public List<Theme> findTheme(String nameTheme) {
+        connection = SetConnection.createConnection();
         List<Theme> foundsThemes = new ArrayList<>();
         try {
             PreparedStatement statement = connection
@@ -67,6 +69,7 @@ public class ThemeDAO {
     }
 
     public Theme getThemebyID(int id) {
+        connection = SetConnection.createConnection();
         try {
             PreparedStatement statement = connection
                     .prepareStatement("select * from themes where id=?");

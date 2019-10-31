@@ -39,6 +39,7 @@ public class QuestionDAO {
     };
 
     public List<Question> getQuestionList(int idTheme) {
+        connection = SetConnection.createConnection();
         List<Question> questionList = new ArrayList<>();
         try {
             PreparedStatement statement = connection
@@ -58,6 +59,7 @@ public class QuestionDAO {
     }
 
     public Question getQuestion(int id) {
+        connection = SetConnection.createConnection();
         Question question = new Question();
         try {
             PreparedStatement statement = connection

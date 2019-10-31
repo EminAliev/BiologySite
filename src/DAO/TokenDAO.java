@@ -23,6 +23,7 @@ public class TokenDAO {
 
 
     public void add(int id, String token) {
+        connection = SetConnection.createConnection();
         if (!token.equals("")) {
             try {
                 PreparedStatement statement = connection
@@ -39,6 +40,7 @@ public class TokenDAO {
     }
 
     public void update(int id, String token) {
+        connection = SetConnection.createConnection();
         if (!token.equals("")) {
             try {
                 PreparedStatement statement = connection
@@ -55,6 +57,7 @@ public class TokenDAO {
     }
 
     public void delete(String token) {
+        connection = SetConnection.createConnection();
         if (!token.equals("")) {
             try {
                 PreparedStatement statement = connection
@@ -69,6 +72,7 @@ public class TokenDAO {
     }
 
     public String find(String token) {
+        connection = SetConnection.createConnection();
         if (!token.equals("")) {
             try {
                 PreparedStatement statement = connection
