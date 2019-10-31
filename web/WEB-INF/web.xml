@@ -75,4 +75,36 @@
         <filter-name>userFilter</filter-name>
         <servlet-name>profileServlet</servlet-name>
     </filter-mapping>
+    <servlet>
+        <servlet-name>testServlet</servlet-name>
+        <servlet-class>servlets.TestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>testServlet</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>resultServlet</servlet-name>
+        <servlet-class>servlets.ResultServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>resultServlet</servlet-name>
+        <url-pattern>/result</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>themeServlet</servlet-name>
+        <servlet-class>servlets.ThemeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>themeServlet</servlet-name>
+        <url-pattern>/theme</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>searchSerlvet</servlet-name>
+        <servlet-class>servlets.SearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>searchSerlvet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
 </web-app>
