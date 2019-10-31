@@ -11,6 +11,7 @@ import java.util.List;
 public class UserDAO {
     private static UserDAO userDAO;
     private Connection connection;
+    // Connection connection = SetConnection.createConnection();
 
     public static UserDAO getUserDAODataBase() {
         if (userDAO == null) {
