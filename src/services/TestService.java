@@ -23,4 +23,8 @@ public class TestService {
     public List<String> listTestsString() {
         return testDAO.listTestsString();
     }
+
+    public List<Test> getTestsByThemeId(Long themeId) {
+        return testDAO.listTest(themeId);
+    }
 }
