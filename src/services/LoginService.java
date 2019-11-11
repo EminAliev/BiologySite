@@ -6,6 +6,12 @@ import helpers.HashPassword;
 import models.User;
 import utils.ValidationUtil;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 public class LoginService {
@@ -63,9 +69,34 @@ public class LoginService {
             } else {
                 error = new Errors("userRegistered", "the user is already registered");
             }
-        }
-        else {
+        } else {
             error = new Errors("incorrectData", "enter the correct data");
+        }
+    }
+
+    public boolean uploadPicture(InputStream is, User user) throws IOException {
+        String root = "/Users/aliev/BiologySite/";
+        String pathname = "/images/" + new Date() + ".jpg";
+        File file = new File(root + pathname);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        FileOutputStream out = new FileOutputStream(file, false);
+
+        byte[] bytes = new byte[512];
+
+        int c = is.read(bytes);
+        while (c != -1) {
+            out.write(bytes);
+            c = is.read(bytes);
+        }
+        is.close();
+        out.close();
+
+        try {
+            return userDAO.uploadPhoto(pathname, user);
+        } catch (SQLException e) {
+            return false;
         }
     }
 

@@ -43,8 +43,8 @@ public class CommentDAO {
             ResultSet resultSet = statement.executeQuery("select * from comments");
             while (resultSet.next()) {
                 LoginService service = new LoginService();
-                User user = service.findbyID(resultSet.getInt("idUser"));
-                comments.add(new Comment(resultSet.getInt("idComment"), user.getId(), resultSet.getString("text"), resultSet.getString("date")));
+                User user = service.findbyID(resultSet.getInt("iduser"));
+                comments.add(new Comment(resultSet.getInt("idcomment"), user.getId(), resultSet.getString("text"), resultSet.getString("date")));
             }
             return comments;
         } catch (SQLException e) {
@@ -55,19 +55,18 @@ public class CommentDAO {
 
     public void addComment(Comment comment) {
         connection = SetConnection.createConnection();
-        if (comment != null) {
-            try {
-                PreparedStatement statement = connection
-                        .prepareStatement("INSERT INTO comments(idUser ,text,date) VALUES (?,?,?)");
-                statement.setInt(1, comment.getIdUser());
-                statement.setString(2, comment.getText());
-                statement.setTimestamp(3, new Timestamp(new Date().getTime()));
-                statement.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        try {
+            PreparedStatement statement = connection
+                    .prepareStatement("INSERT INTO comments(iduser ,text,date) VALUES (?,?,?)");
+            statement.setInt(1, comment.getIdUser());
+            statement.setString(2, comment.getText());
+            statement.setTimestamp(3, new Timestamp(new Date().getTime()));
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
+
 
     /*public Comment newComment(User username, Theme theme, String date, String text) throws SQLException {
         connection = SetConnection.createConnection();

@@ -184,7 +184,7 @@ public class UserDAO {
         User user = null;
         try {
             PreparedStatement statement = connection
-                    .prepareStatement("select * from users where id = " + id + ";");
+                    .prepareStatement("select * from users where id =?");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
@@ -196,6 +196,13 @@ public class UserDAO {
             throw new IllegalStateException(e);
         }
         return user;
+    }
+
+    public boolean uploadPhoto(String photo, User user) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE users SET photo = ? where id = ?");
+        statement.setString(1, photo);
+        statement.setInt(2, user.getId());
+        return statement.execute();
     }
 }
 

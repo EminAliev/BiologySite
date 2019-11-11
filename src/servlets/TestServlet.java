@@ -1,7 +1,9 @@
 package servlets;
 
+import models.Question;
 import models.Test;
 import models.Theme;
+import services.QuestionService;
 import services.TestService;
 import services.ThemeService;
 import utils.HelperConfiq;
@@ -19,6 +21,8 @@ import java.util.Map;
 @WebServlet(name = "TestServlet")
 public class TestServlet extends HttpServlet {
     private TestService service = new TestService();
+    private ThemeService themeService = new ThemeService();
+    private QuestionService questionService = new QuestionService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -27,8 +31,12 @@ public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, Object> root = new HashMap<>();
         List<Test> testList = service.listTest();
+        //List<Question> questionList = questionService.getQuestionList();
+        List<Theme> themeList = themeService.listThemes();
+
         root.put("tests", testList);
         root.put("url", request.getContextPath());
+
 
         if (request.getParameter("testId") != null) {
             root.put("test", testList.get(Integer.parseInt(request.getParameter("testId")) - 1));
@@ -37,7 +45,7 @@ public class TestServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        HelperConfiq.render(request, response, "test.ftl", root);
+        HelperConfiq.render(request, response, "tests.ftl", root);
     }
 }
 

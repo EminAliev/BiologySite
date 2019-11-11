@@ -6,7 +6,7 @@
 
 <#macro content>
 <div class="wrapper">
-    <a href='/home'>Назад</a>
+    <a href='/theme'>Назад</a>
     <h3>Комментарии</h3>
     <#if comments?has_content>
         <#list comments as c>
@@ -32,3 +32,4 @@
 </#macro>
 
 </html>
+<@main></@main>

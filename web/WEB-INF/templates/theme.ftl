@@ -60,6 +60,7 @@
     <#if theme??>
         ${theme.textTheme}
         <p/> <a href="${url + "/test" + "?testId=" + theme.id}">Начать тест</a>
+        <p/> <a href="${"/comments"}">Комментарии</a>
     </#if>
 
 </div>

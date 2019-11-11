@@ -46,6 +46,10 @@
                 <span class="glyphicon glyphicon-cog" style="margin-right: 5px"></span>
                 <a href="/delete">Удалить</a>
             </button>
+            <button type="button" class="btn" style="margin-left: 41px; margin-bottom: 30px">
+                <span class="glyphicon glyphicon-cog" style="margin-right: 5px"></span>
+                <a href="/logout">Выйти</a>
+            </button>
         </div>
 
 

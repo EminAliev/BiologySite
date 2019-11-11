@@ -2,24 +2,30 @@ package models;
 
 public class Question {
     private int id;
-    private String questionText, questionImage, answerA, answerB, answerC, answerD, correctAnswer;
-    private boolean isImageQuestion;
+    private String questionText, answerA, answerB, answerC, answerD, correctAnswer;
     private int idTheme;
 
 
     public Question() {
     }
 
-    public Question(int id, String questionText, String questionImage, String answerA, String answerB, String answerC, String answerD, String correctAnswer, boolean isImageQuestion, int idTheme) {
-        this.id = id;
+    public Question(String questionText, String answerA, String answerB, String answerC, String answerD, String correctAnswer) {
         this.questionText = questionText;
-        this.questionImage = questionImage;
         this.answerA = answerA;
         this.answerB = answerB;
         this.answerC = answerC;
         this.answerD = answerD;
         this.correctAnswer = correctAnswer;
-        this.isImageQuestion = isImageQuestion;
+    }
+
+    public Question(int id, String questionText, String answerA, String answerB, String answerC, String answerD, String correctAnswer, int idTheme) {
+        this.id = id;
+        this.questionText = questionText;
+        this.answerA = answerA;
+        this.answerB = answerB;
+        this.answerC = answerC;
+        this.answerD = answerD;
+        this.correctAnswer = correctAnswer;
         this.idTheme = idTheme;
     }
 
@@ -39,13 +45,6 @@ public class Question {
         this.questionText = questionText;
     }
 
-    public String getQuestionImage() {
-        return questionImage;
-    }
-
-    public void setQuestionImage(String questionImage) {
-        this.questionImage = questionImage;
-    }
 
     public String getAnswerA() {
         return answerA;
@@ -87,13 +86,6 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
-    public boolean isImageQuestion() {
-        return isImageQuestion;
-    }
-
-    public void setImageQuestion(boolean imageQuestion) {
-        isImageQuestion = imageQuestion;
-    }
 
     public int getIdTheme() {
         return idTheme;

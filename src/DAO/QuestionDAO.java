@@ -27,15 +27,13 @@ public class QuestionDAO {
     private RowMapper<Question> questionRowMapper = row -> {
         Integer id = row.getObject("id", Integer.class);
         String questionText = row.getString("questiontext");
-        String questionImage = row.getString("questionimage");
         String answerA = row.getString("answera");
         String answerB = row.getString("answerb");
         String answerC = row.getString("answerc");
         String answerD = row.getString("answerd");
         String correctAnswer = row.getString("correctanswer");
-        Boolean isImageQuestion = row.getBoolean("isimagequestion");
         Integer idTheme = row.getObject("idtheme", Integer.class);
-        return new Question(id, questionText, questionImage, answerA, answerB, answerC, answerD, correctAnswer, isImageQuestion, idTheme);
+        return new Question(id, questionText, answerA, answerB, answerC, answerD, correctAnswer, idTheme);
     };
 
     public List<Question> getQuestionList(int idTheme) {
