@@ -55,7 +55,7 @@
 
 </div>
 <div id="content">
-    <form method="post" action="/test" class="test-form">
+    <form method="post" class="test-form">
     <#list questions as question>
         <p>
         <h3> ${question.questionText}</h3>
@@ -63,23 +63,22 @@
         <p>
         <ul>
             <li>
-                <input type="checkbox" name="option" value="a1"> ${question.answerA}
+                <input type="checkbox" name="option" value="answera"> ${question.answerA}
             </li>
             <li>
-                <input type="checkbox" name="option" value="a2"> ${question.answerB}
+                <input type="checkbox" name="option" value="answerb"> ${question.answerB}
             </li>
             <li>
-                <input type="checkbox" name="option" value="a3"> ${question.answerC}
+                <input type="checkbox" name="option" value="answerc"> ${question.answerC}
             </li>
             <li>
-                <input type="checkbox" name="option" value="a4"> ${question.answerD}
+                <input type="checkbox" name="option" value="answerd"> ${question.answerD}
             </li>
         </ul></p>
 
     </#list>
 
         <input type="submit" class="button" value="Результаты">
-        ${count}
     </form>
 </div>
 </body>

@@ -1,6 +1,7 @@
 package servlets;
 
 
+import models.Test;
 import services.TestService;
 import utils.HelperConfiq;
 
@@ -21,15 +22,15 @@ public class TestServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[] checked = request.getParameterValues("option");
+
         int count = 0;
-        List<String> correctAnswers = service.listCorrectAnswer();
-
-
+        List<Test> correctAnswers = service.listTest();
         for (int i = 0; i < checked.length; i++) {
             if (checked[i].equals(correctAnswers.get(i))) {
                 count++;
             }
         }
+        System.out.println(count);
         response.sendRedirect("/result");
         request.setAttribute("count", count);
     }
@@ -45,6 +46,7 @@ public class TestServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
 
         HelperConfiq.render(request, response, "tests.ftl", root);
     }
