@@ -2,6 +2,7 @@ package DAO;
 
 import helpers.RowMapper;
 import helpers.SetConnection;
+import models.Question;
 import models.Test;
 
 import java.sql.*;
@@ -35,24 +36,6 @@ public class TestDAO {
         Integer idTheme = row.getObject("idtheme", Integer.class);
         return new Test(id, questionText, answerA, answerB, answerC, answerD, correctAnswer, idTheme);
     };
-
-    public List<Test> listTest(Long themeId) {
-        connection = SetConnection.createConnection();
-        List<Test> testList = new ArrayList<>();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from questions where idTheme = " + themeId);
-            while (resultSet.next()) {
-                Test test = testRowMapper.mapRow(resultSet);
-                testList.add(test);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return testList;
-    }
 
     public List<Test> listTest() {
         connection = SetConnection.createConnection();
@@ -115,6 +98,7 @@ public class TestDAO {
         }
         return null;
     }
+
 
 
 }

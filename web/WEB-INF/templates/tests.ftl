@@ -52,30 +52,17 @@
 <body>
 <div id="header"><h1>Тесты</h1></div>
 <div id="sidebar">
-
+    <#list tests as test>
+        <p/> <a href="${url + "?testId=" + test.id}">${test.questionText}</a>
+    </#list>
 </div>
 <div id="content">
-    <#list questions as question>
-        <p>
-        <h3> ${question.questionText}</h3>
-
-        <p><ul>
-            <li>
-                <input type="checkbox" name="option1" value="a1"> ${question.answerA}
-            </li>
-            <li>
-                <input type="checkbox" name="option2" value="a2"> ${question.answerB}
-            </li>
-            <li>
-                <input type="checkbox" name="option3" value="a3"> ${question.answerC}
-            </li>
-            <li>
-                <input type="checkbox" name="option4" value="a4"> ${question.answerD}
-            </li>
-        </ul></p>
+    <#list tests as test>
+        ${test.answerA}
+        ${test.answerB}
+        ${test.answerC}
+        ${test.answerD}
     </#list>
-
-    <input type="submit" class="button" value="Результаты">
 
 </div>
 </body>

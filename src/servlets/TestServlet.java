@@ -30,10 +30,16 @@ public class TestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, Object> root = new HashMap<>();
+        List<Test> testList = service.listTest();
+        //List<Question> questionList = questionService.getQuestionList();
+        List<Theme> themeList = themeService.listThemes();
+
+        root.put("tests", testList);
         root.put("url", request.getContextPath());
 
+
         if (request.getParameter("testId") != null) {
-            root.put("questions", service.getTestsByThemeId(Long.parseLong(request.getParameter("testId"))));
+            root.put("test", testList.get(Integer.parseInt(request.getParameter("testId")) - 1));
         }
 
         request.setCharacterEncoding("UTF-8");
