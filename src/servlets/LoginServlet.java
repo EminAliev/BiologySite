@@ -4,11 +4,14 @@ import helpers.HashPassword;
 import models.User;
 import services.LoginService;
 import services.TokenService;
+import utils.HelperConfiq;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet(name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -47,6 +50,15 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //обработка (шаблон)
+        Map<String, Object> root = new HashMap<>();
+
+        root.put("error", request.getParameter("error"));
+        root.put("username", request.getParameter("username"));
+
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        HelperConfiq.render(request, response, "login.ftl", (HashMap) root);
+
     }
 }

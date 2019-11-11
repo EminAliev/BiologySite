@@ -10,7 +10,7 @@ public class FreeMarkerConfig {
 
     public static Configuration getConfig(HttpServletRequest req) {
         if (cfg == null) {
-            cfg = new Configuration(Configuration.VERSION_2_3_22);
+            cfg = new Configuration(Configuration.VERSION_2_3_23);
             cfg.setServletContextForTemplateLoading(req.getServletContext(), "/WEB-INF/templates");
             cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
         }

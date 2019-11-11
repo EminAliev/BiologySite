@@ -80,13 +80,13 @@ public class UserDAO {
         connection = SetConnection.createConnection();
         try {
             PreparedStatement statement = connection
-                    .prepareStatement("insert into users(username,password,email,name,fullname,classNumber) values (?,?,?,?,?,?)");
+                    .prepareStatement("insert into users(username,password,name,fullname,classnumber,email) values (?,?,?,?,?,?)");
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
-            statement.setString(3, user.getEmail());
-            statement.setString(4, user.getName());
-            statement.setString(5, user.getFullname());
-            statement.setLong(6, user.getClassNumber());
+            statement.setString(3, user.getName());
+            statement.setString(4, user.getFullname());
+            statement.setLong(5, user.getClassNumber());
+            statement.setString(6, user.getEmail());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -166,7 +166,7 @@ public class UserDAO {
         User user = null;
         try {
             PreparedStatement statement = connection
-                    .prepareStatement("select * from users where username = " + username + ";");
+                    .prepareStatement("select * from users WHERE username = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {

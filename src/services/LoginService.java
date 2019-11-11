@@ -53,9 +53,9 @@ public class LoginService {
     }
 
 
-    public void createUserValidate(String username, String password, String name, String fullname, String email, int classnumber) {
+    public void createUserValidate(String username, String password, String name, String fullname, int classnumber, String email) {
         error = null;
-        if (ValidationUtil.validateString(username) && ValidationUtil.validatePassword(password)) {
+        if (ValidationUtil.IsRightPassword(username) && ValidationUtil.IsRightPassword(password)) {
             password = HashPassword.md5(password);
             User user = new User(username, password, name, fullname, classnumber, email);
             if (userDAO.findByUsername(username) == null) {
@@ -63,12 +63,9 @@ public class LoginService {
             } else {
                 error = new Errors("userRegistered", "the user is already registered");
             }
-        } else if (!ValidationUtil.validatePassword(password)) {
-            error = new Errors("wrongPassword", "Wrong password, check the correctness");
-        } else if (!ValidationUtil.validateString(username)) {
-            error = new Errors("wrongUsername", "wrong username,check the correctness");
-        } else {
-            error = new Errors("wrongWords", "wrong words, check the correctness");
+        }
+        else {
+            error = new Errors("incorrectData", "enter the correct data");
         }
     }
 
@@ -76,4 +73,6 @@ public class LoginService {
     public Errors getErrorMessage() {
         return error;
     }
+
+
 }

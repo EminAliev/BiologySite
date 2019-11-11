@@ -55,26 +55,6 @@
         <servlet-name>profileServlet</servlet-name>
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
-    <filter>
-        <filter-name>loginFilter</filter-name>
-        <filter-class>filters.LoginFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>loginFilter</filter-name>
-        <servlet-name>loginServlet</servlet-name>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>loginFilter</filter-name>
-        <servlet-name>registerServlet</servlet-name>
-    </filter-mapping>
-    <filter>
-        <filter-name>userFilter</filter-name>
-        <filter-class>filters.UserFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>userFilter</filter-name>
-        <servlet-name>profileServlet</servlet-name>
-    </filter-mapping>
     <servlet>
         <servlet-name>testServlet</servlet-name>
         <servlet-class>servlets.TestServlet</servlet-class>
@@ -106,5 +86,13 @@
     <servlet-mapping>
         <servlet-name>searchSerlvet</servlet-name>
         <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>homeServlet</servlet-name>
+        <servlet-class>servlets.HomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>homeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
 </web-app>
