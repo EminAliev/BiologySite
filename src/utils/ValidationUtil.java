@@ -19,15 +19,10 @@ public class ValidationUtil {
         return password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})");
     }
 
-    public static boolean IsRight(String s){
-        Pattern data = Pattern.compile("(^[a-zA-Z0-9\\s]+)");
-        Matcher m = data.matcher(s);
+    public static boolean validateUsernamePassword(String string) {
+        Pattern p = Pattern.compile("(^[a-zA-Z0-9]+)");
+        Matcher m = p.matcher(string);
         return m.matches();
-    }
-    public static boolean IsRightPassword(String s){
-        Pattern data = Pattern.compile("(^[a-zA-Z0-9]+)");
-        Matcher pass = data.matcher(s);
-        return pass.matches();
 
     }
 

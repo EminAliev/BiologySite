@@ -55,7 +55,7 @@ public class LoginService {
 
     public void createUserValidate(String username, String password, String name, String fullname, int classnumber, String email) {
         error = null;
-        if (ValidationUtil.IsRightPassword(username) && ValidationUtil.IsRightPassword(password)) {
+        if (ValidationUtil.validateUsernamePassword(username) && ValidationUtil.validateUsernamePassword(password)) {
             password = HashPassword.md5(password);
             User user = new User(username, password, name, fullname, classnumber, email);
             if (userDAO.findByUsername(username) == null) {
