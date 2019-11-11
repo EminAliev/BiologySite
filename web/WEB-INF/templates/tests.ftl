@@ -55,28 +55,31 @@
 
 </div>
 <div id="content">
+    <form method="post" action="/test" class="test-form">
     <#list questions as question>
         <p>
         <h3> ${question.questionText}</h3>
 
-        <p><ul>
+        <p>
+        <ul>
             <li>
-                <input type="checkbox" name="option1" value="a1"> ${question.answerA}
+                <input type="checkbox" name="option" value="a1"> ${question.answerA}
             </li>
             <li>
-                <input type="checkbox" name="option2" value="a2"> ${question.answerB}
+                <input type="checkbox" name="option" value="a2"> ${question.answerB}
             </li>
             <li>
-                <input type="checkbox" name="option3" value="a3"> ${question.answerC}
+                <input type="checkbox" name="option" value="a3"> ${question.answerC}
             </li>
             <li>
-                <input type="checkbox" name="option4" value="a4"> ${question.answerD}
+                <input type="checkbox" name="option" value="a4"> ${question.answerD}
             </li>
         </ul></p>
+
     </#list>
 
-    <input type="submit" class="button" value="Результаты">
-
+        <input type="submit" class="button" value="Результаты">
+    </form>
 </div>
 </body>
 </html>
