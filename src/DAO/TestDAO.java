@@ -116,5 +116,25 @@ public class TestDAO {
         return null;
     }
 
+    public List<String> listCorrectAnswer() {
+        try {
+            connection = SetConnection.createConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "select * from questions where idtheme=?"
+            );
+            ResultSet rs = statement.executeQuery();
+            List<String> test = new ArrayList<>();
+            while (rs.next()) {
+                test.add(rs.getString(7));
+
+            }
+            return test;
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
 
 }

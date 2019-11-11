@@ -79,6 +79,7 @@
     </#list>
 
         <input type="submit" class="button" value="Результаты">
+        ${count}
     </form>
 </div>
 </body>

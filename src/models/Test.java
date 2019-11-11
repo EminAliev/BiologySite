@@ -10,6 +10,10 @@ public class Test {
     private String correctAnswer;
     private int idTheme;
 
+    public Test(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
     public Test(int id, String questionText, String answerA, String answerB, String answerC, String answerD, String correctAnswer, int idTheme) {
         this.id = id;
         this.questionText = questionText;
