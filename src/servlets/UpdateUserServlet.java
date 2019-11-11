@@ -3,6 +3,7 @@ package servlets;
 import helpers.HashPassword;
 import models.User;
 import services.LoginService;
+import utils.HelperConfiq;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet(name = "UpdateUserServlet")
 public class UpdateUserServlet extends HttpServlet {
@@ -18,32 +21,51 @@ public class UpdateUserServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("curr_user");
-        if (!request.getParameter("username").equals("")) {
-            user.setUsername(request.getParameter("username"));
-        }
-        if (!request.getParameter("password").equals("")) {
-            user.setPassword(HashPassword.md5(request.getParameter("password")));
-        }
-        if (!request.getParameter("name").equals("")) {
-            user.setName(request.getParameter("name"));
-        }
-        if (!request.getParameter("fullname").equals("")) {
-            user.setFullname(request.getParameter("fullname"));
-        }
-        if (!request.getParameter("email").equals("")) {
-            user.setEmail(request.getParameter("email"));
-        }
-        if (!request.getParameter("classnumber").equals("")) {
-            user.setClassNumber(Integer.parseInt(request.getParameter("classnumber")));
-        }
+        int id = Integer.parseInt(request.getParameter("id"));
+        String username = request.getParameter("username").toLowerCase();
+        String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String fullname = request.getParameter("fullaname");
+        int classNumber = Integer.parseInt(request.getParameter("classnumber"));
+        String email = request.getParameter("email");
+
+        user.setId(id);
+
+        user.setUsername(username);
+
+        user.setPassword(HashPassword.md5(password));
+
+        user.setName(name);
+
+        user.setFullname(fullname);
+
+
+        user.setEmail(email);
+
+        user.setClassNumber(classNumber);
+
 
         service.editAccount(user);
+        response.sendRedirect("/profile");
+
     }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("curr_user");
-        request.setAttribute("curr_user", user);
-        //обработка (шаблон)
+        Map<String, Object> root = new HashMap<>();
+        root.put("id", user.getId());
+        root.put("username", user.getName());
+        root.put("password", user.getPassword());
+        root.put("name", user.getName());
+        root.put("fullname", user.getFullname());
+        root.put("classnumber", user.getClassNumber());
+        root.put("email", user.getEmail());
+
+
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        HelperConfiq.render(request, response, "update.ftl", (HashMap) root);
     }
 }

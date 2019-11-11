@@ -5,6 +5,13 @@ public class Theme {
     private String nameTheme;
     private String textTheme;
 
+    public Theme() {
+    }
+
+    public Theme(String nameTheme) {
+        this.nameTheme = nameTheme;
+    }
+
     public Theme(Integer id, String nameTheme, String textTheme) {
         this.id = id;
         this.nameTheme = nameTheme;

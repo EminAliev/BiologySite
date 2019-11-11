@@ -1,46 +1,38 @@
 package models;
 
 public class Comment {
-    private User username;
 
-    private Integer postId;
-    private Theme theme;
-    private Integer idComment;
-    private Integer idUser;
+    private int id;
+    private int idUser;
     private String text;
     private String date;
 
-
-    public Comment(Integer idComment, Integer idUser, String text, String date) {
-        this.idComment = idComment;
+    public Comment(int id, int idUser, String text, String date) {
+        this.id = id;
         this.idUser = idUser;
         this.text = text;
         this.date = date;
     }
 
-    public Comment(User username, Integer postId, Theme theme, Integer idComment, Integer idUser, String text, String date) {
-        this.username = username;
-        this.postId = postId;
-        this.theme = theme;
-        this.idComment = idComment;
+    public Comment(int idUser, String text, String date) {
         this.idUser = idUser;
         this.text = text;
         this.date = date;
     }
 
-    public Integer getIdComment() {
-        return idComment;
+    public int getId() {
+        return id;
     }
 
-    public void setIdComment(Integer idComment) {
-        this.idComment = idComment;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Integer getIdUser() {
+    public int getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(Integer idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 
@@ -58,29 +50,5 @@ public class Comment {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public User getUsername() {
-        return username;
-    }
-
-    public void setUsername(User username) {
-        this.username = username;
-    }
-
-    public Integer getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Integer postId) {
-        this.postId = postId;
-    }
-
-    public Theme getTheme() {
-        return theme;
-    }
-
-    public void setTheme(Theme theme) {
-        this.theme = theme;
     }
 }

@@ -24,4 +24,8 @@ public class ThemeService {
         return themeDAO.getThemebyID(id);
     }
 
+    public List<String> listNameThemes() {
+        return themeDAO.listNameThemes();
+    }
+
 }

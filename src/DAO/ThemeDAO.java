@@ -87,5 +87,46 @@ public class ThemeDAO {
         }
         return null;
     }
+
+    /*public List<String> listNameThemes() {
+        connection = SetConnection.createConnection();
+        List<String> themeNameList = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select * from themes");
+            statement.setString(1, name);
+
+            while (resultSet.next()) {
+                Theme theme = new Theme();
+                themeNameList.add(theme.getNameTheme());
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return themeNameList;
+    }*/
+
+    public List<String> listNameThemes() {
+        try {
+            connection = SetConnection.createConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "select * from themes"
+            );
+            ResultSet rs = statement.executeQuery();
+            List<String> name_theme = new ArrayList<>();
+            while (rs.next()) {
+                name_theme.add(
+                        rs.getString(2)
+                );
+            }
+            return name_theme;
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
 }
 

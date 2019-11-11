@@ -95,4 +95,12 @@
         <servlet-name>homeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>commentServlet</servlet-name>
+        <servlet-class>servlets.CommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>commentServlet</servlet-name>
+        <url-pattern>/comments</url-pattern>
+    </servlet-mapping>
 </web-app>

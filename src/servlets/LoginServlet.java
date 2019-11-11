@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
                     tokenService.add(user.getId(), token);
                 }
 
-                response.sendRedirect("/home");
+                response.sendRedirect("/theme");
 
             } else {
                 response.sendRedirect("/login?error=wrong_password&username=" + username);

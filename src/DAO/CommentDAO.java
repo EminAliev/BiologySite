@@ -28,8 +28,8 @@ public class CommentDAO {
 
 
     private RowMapper<Comment> commentRowMapper = row -> {
-        Integer idComment = row.getObject("idComment", Integer.class);
-        Integer idUser = row.getObject("idUser", Integer.class);
+        Integer idComment = row.getObject("id", Integer.class);
+        Integer idUser = row.getObject("iduser", Integer.class);
         String text = row.getString("text");
         String date = row.getString("date");
         return new Comment(idComment, idUser, text, date);
@@ -58,11 +58,10 @@ public class CommentDAO {
         if (comment != null) {
             try {
                 PreparedStatement statement = connection
-                        .prepareStatement("INSERT INTO comments(idComment, idUser ,text,date) VALUES (?,?,?,?)");
+                        .prepareStatement("INSERT INTO comments(idUser ,text,date) VALUES (?,?,?)");
                 statement.setInt(1, comment.getIdUser());
-                statement.setInt(2, comment.getIdComment());
-                statement.setString(3, comment.getText());
-                statement.setTimestamp(4, new Timestamp(new Date().getTime()));
+                statement.setString(2, comment.getText());
+                statement.setTimestamp(3, new Timestamp(new Date().getTime()));
                 statement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();

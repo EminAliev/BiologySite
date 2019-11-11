@@ -26,8 +26,7 @@ public class CommentService {
     }
 
 
-    public void addComment(int idUser, int idComment, String text) {
-        Comment comment = new Comment(idUser, idComment, text, "DATE");
+    public void addComment(Comment comment) {
         commentDAO.addComment(comment);
     }
 
