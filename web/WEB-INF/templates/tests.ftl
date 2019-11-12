@@ -58,7 +58,7 @@
     <#list questions as question>
         <p>
         <h3> ${question.questionText}</h3>
-
+        <form method = "post" action="/test" class="test-form">
         <p><ul>
             <li>
                 <input type="checkbox" name="option1" value="a1"> ${question.answerA}
@@ -73,6 +73,7 @@
                 <input type="checkbox" name="option4" value="a4"> ${question.answerD}
             </li>
         </ul></p>
+        </form>
     </#list>
 
     <input type="submit" class="button" value="Результаты">
